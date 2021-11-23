@@ -1,12 +1,12 @@
 import express from "express";
 import * as userController from '../controller/userController.js';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.route('/api-userCreate')
+userRouter.route('/api-userCreate')
 	 .post(userController.create);
-router.route('/api-usersGetAll')
+userRouter.route('/api-usersGetAll')
 	 .get(userController.getAll);
 
 
-export default router;
+export default userRouter;
