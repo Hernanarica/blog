@@ -18,3 +18,13 @@ export function getAll(req, res) {
 		res.status(400).json({ msg: 'Error al traer los posts' });
 	});
 }
+
+export function remove(req, res) {
+	const id = req.params.id;
+
+	post.remove(id).then(() => {
+		res.json({ msg: 'El post fue eliminado con éxito' });
+	}).catch(err => {
+		res.status(400).json({ msg: 'Error al eliminar el post' });
+	});
+}

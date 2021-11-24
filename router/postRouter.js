@@ -9,4 +9,7 @@ postRouter.route('/api-postsGetAll')
 postRouter.route('/api-postCreate')
 	 .post(postController.create);
 
+postRouter.route('/api-postRemove/:id')
+	 .delete(postController.remove);
+
 export default postRouter;
