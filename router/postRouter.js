@@ -3,13 +3,18 @@ import * as postController from '../controller/postController.js';
 
 const postRouter = express.Router();
 
-postRouter.route('/api-postsGetAll')
+postRouter.route('/api-posts')
 	 .get(postController.getAll);
 
-postRouter.route('/api-postCreate')
+postRouter.route('/api-posts-published')
+	 .get(postController.getAllPublished);
+
+postRouter.route('/api-post')
 	 .post(postController.create);
 
-postRouter.route('/api-postRemove/:id')
-	 .delete(postController.remove);
+postRouter.route('/api-post/:id')
+	 .delete(postController.remove)
+	 .patch(postController.published)
+	 .put(postController.edit);
 
 export default postRouter;
