@@ -6,9 +6,10 @@ export async function create(postData) {
 		const newPost = {
 			title: postData.title,
 			text: postData.text,
+			created: postData.created,
 			public: postData.public
 		};
-
+		
 		return await db.collection('posts').insertOne(newPost);
 	});
 }
@@ -53,11 +54,11 @@ export async function edit(postData) {
 		title: postData.title,
 		text: postData.text
 	};
-
+	
 	return DBConnection(async db => {
 		const oldPost = await db.collection('posts').findOne({ _id: ObjectId(post.id) });
 		post.public   = oldPost.public;
-
+		
 		if (oldPost) {
 			return await db.collection('posts').replaceOne(
 				 {
@@ -70,7 +71,7 @@ export async function edit(postData) {
 				 }
 			);
 		}
-
+		
 		throw ({ msg: 'El post no fue encontrado' });
 	});
 }

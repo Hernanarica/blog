@@ -4,6 +4,7 @@ export function create(req, res) {
 	post.create({
 		title: req.body.title,
 		text: req.body.text,
+		created: new Date().toDateString(),
 		public: false
 	}).then(() => {
 		res.json({ msg: 'El post fue creado con éxito' });
@@ -30,7 +31,7 @@ export function getAllPublished(req, res) {
 
 export function remove(req, res) {
 	const id = req.params.id;
-
+	
 	post.remove(id).then(() => {
 		res.json({ msg: 'El post fue eliminado con éxito' });
 	}).catch(() => {
