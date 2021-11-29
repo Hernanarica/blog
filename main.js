@@ -16,6 +16,7 @@ APP.use('/user', userRouter);
 APP.use('/user', authRouter);
 APP.use('/user', postRouter);
 
+
 APP.listen(80, () => {
 	console.log('SERVER ON :)');
 });

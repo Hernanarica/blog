@@ -34,3 +34,27 @@ export async function getAll() {
 		throw({ msg: 'Error al intentar traer los usuarios' });
 	});
 }
+
+export async function login(email, password){
+	return DBConnection(async db => {
+		const user = await db.collection('users').findOne({ email: email });
+
+		if (user) {
+			const validar = await bcrypt.compare(password, user.password)
+			if (validar){
+				return {...user, password: null};
+			}else {
+				throw{ msg: 'La contraseña es incorrecta' };
+			}
+
+		}
+
+		throw({ msg: 'Error al intentar ingresar al sitio' });
+	});
+}
+
+export default {
+	create,
+	getAll,
+	login
+}
