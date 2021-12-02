@@ -3,12 +3,7 @@ import bcrypt from 'bcrypt';
 
 export async function create(userData) {
 	return DBConnection(async db => {
-		const newUser = {
-			name: userData.name,
-			lastname: userData.lastname,
-			email: userData.email,
-			password: userData.password
-		};
+		const newUser = { ...userData };
 
 		const oldUser = await db.collection('users').findOne({ email: newUser.email });
 

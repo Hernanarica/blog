@@ -1,15 +1,22 @@
-import * as user from '../model/user.js';
+import * as user from "../model/user.js";
+import * as yup from "yup";
+
+let userScheme = yup.object({
+	name: yup.string().required("El nombre es obligatorio"),
+	lastname: yup.string().required("El apellido es obligatorio"),
+	email: yup.string().email().required("El email es obligatorio"),
+	password: yup.string().required("La contraseña es obligatoria")
+}).noUnknown();
 
 export function create(req, res) {
-	user.create({
-		name: req.body.name,
-		lastname: req.body.lastname,
-		email: req.body.email,
-		password: req.body.password
-	}).then(r => {
-		res.json({ msg: r });
-	}).catch(err => {
-		res.status(400).json({ msg: err.msg });
+	userScheme.validate(req.body)
+		 .then(userValid => {
+			 return user.create(userValid);
+		 })
+		 .then(r => {
+			 res.json({ msg: r });
+		 }).catch(err => {
+		res.status(400).json({ msg: err.msg, err: err.errors });
 	});
 }
 

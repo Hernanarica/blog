@@ -1,15 +1,24 @@
 import * as post from "../model/post.js";
+import * as yup from "yup";
+
+let postSchema = yup.object({
+	title: yup.string().required("El título es requerido"),
+	text: yup.string().required("El texto es requerido")
+}).noUnknown();
 
 export function create(req, res) {
-	post.create({
-		title: req.body.title,
-		text: req.body.text,
-		created: new Date().toDateString(),
-		public: false
-	}).then(() => {
-		res.json({ msg: 'El post fue creado con éxito' });
-	}).catch(() => {
-		res.status(400).json({ msg: 'Error al crear el post' });
+	postSchema.validate(req.body)
+		 .then(postValid => {
+			 return post.create({
+				 ...postValid,
+				 created: new Date().toDateString(),
+				 public: false
+			 });
+		 })
+		 .then(() => {
+			 res.json({ msg: 'El post fue creado con éxito' });
+		 }).catch(err => {
+		res.status(400).json({ msg: 'Error al crear el post', err: err.errors });
 	});
 }
 
@@ -31,7 +40,7 @@ export function getAllPublished(req, res) {
 
 export function remove(req, res) {
 	const id = req.params.id;
-	
+
 	post.remove(id).then(() => {
 		res.json({ msg: 'El post fue eliminado con éxito' });
 	}).catch(() => {
@@ -48,13 +57,16 @@ export function published(req, res) {
 }
 
 export function edit(req, res) {
-	post.edit({
-		id: req.params.id,
-		title: req.body.title,
-		text: req.body.text
-	}).then(r => {
-		res.json({ msg: 'Post editado con éxito' });
-	}).catch(err => {
-		res.status(400).json({ msg: err.msg });
+	postSchema.validate(req.body)
+		 .then(postValid => {
+			 return post.edit({
+				 ...postValid,
+				 id: req.params.id
+			 });
+		 })
+		 .then(r => {
+			 res.json({ msg: 'Post editado con éxito' });
+		 }).catch(err => {
+		res.status(400).json({ msg: err.msg, err: err.errors });
 	});
 }

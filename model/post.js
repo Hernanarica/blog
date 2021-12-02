@@ -3,13 +3,8 @@ import { ObjectId } from "mongodb";
 
 export async function create(postData) {
 	return DBConnection(async db => {
-		const newPost = {
-			title: postData.title,
-			text: postData.text,
-			created: postData.created,
-			public: postData.public
-		};
-		
+		const newPost = { ...postData };
+
 		return await db.collection('posts').insertOne(newPost);
 	});
 }
@@ -49,16 +44,13 @@ export async function published(id) {
 }
 
 export async function edit(postData) {
-	const post = {
-		id: postData.id,
-		title: postData.title,
-		text: postData.text
-	};
-	
+	const post = { ...postData };
+
 	return DBConnection(async db => {
 		const oldPost = await db.collection('posts').findOne({ _id: ObjectId(post.id) });
 		post.public   = oldPost.public;
-		
+		post.created  = oldPost.created;
+
 		if (oldPost) {
 			return await db.collection('posts').replaceOne(
 				 {
@@ -67,11 +59,12 @@ export async function edit(postData) {
 				 {
 					 title: post.title,
 					 text: post.text,
+					 created: post.created,
 					 public: post.public
 				 }
 			);
 		}
-		
+
 		throw ({ msg: 'El post no fue encontrado' });
 	});
 }
