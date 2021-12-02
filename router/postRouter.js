@@ -15,6 +15,7 @@ postRouter.route('/api-post')
 	 .post(postController.create);
 
 postRouter.route('/api-post/:id')
+    .get(postController.getById)
 	 .delete(postController.remove)
 	 .patch(postController.published)
 	 .put(postController.edit);
