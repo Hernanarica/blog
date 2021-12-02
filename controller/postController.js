@@ -21,6 +21,16 @@ export function getAll(req, res) {
 	});
 }
 
+export function getById(req, res) {
+   const id = req.params.id;
+   
+   post.getById(id).then(resp => {
+      res.json(resp);
+   }).catch(() => {
+      res.status(400).json({ msg: 'Error al traer el post' });
+   });
+}
+
 export function getAllPublished(req, res) {
 	post.getAllPublished().then(r => {
 		res.json(r);

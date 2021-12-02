@@ -20,6 +20,12 @@ export async function getAll() {
 	});
 }
 
+export async function getById(id) {
+   return DBConnection(async db => {
+      return await db.collection('posts').findOne({ _id: ObjectId(id) });
+   });
+}
+
 export async function getAllPublished() {
 	return DBConnection(async db => {
 		const posts = await db.collection('posts').find().toArray();
