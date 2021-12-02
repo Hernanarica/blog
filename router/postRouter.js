@@ -1,5 +1,7 @@
 import express from "express";
 import * as postController from '../controller/postController.js';
+import { authToken } from "../middleware/auth.js";
+
 
 const postRouter = express.Router();
 

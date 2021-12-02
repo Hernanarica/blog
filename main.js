@@ -3,7 +3,6 @@ import userRouter from "./router/userRouter.js";
 import authRouter from "./router/authRouter.js";
 import postRouter from "./router/postRouter.js";
 import opinionRouter from "./router/opinionRouter.js";
-import { authToken } from "./middleware/auth.js";
 import dotenv from 'dotenv';
 
 import cors from 'cors';
