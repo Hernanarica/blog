@@ -1,5 +1,6 @@
 import DBConnection from "./database.js";
 import bcrypt from 'bcrypt';
+import { ObjectId } from "mongodb";
 
 export async function create(userData) {
 	return DBConnection(async db => {
@@ -27,5 +28,43 @@ export async function getAll() {
 		}
 
 		throw({ msg: 'Error al intentar traer los usuarios' });
+	});
+}
+
+export async function remove(id) {
+	return DBConnection(async db => {
+		return await db.collection('users').deleteOne({ _id: ObjectId(id) });
+	});
+}
+
+export async function edit(userData) {
+	const user = { ...userData };
+
+	return DBConnection(async db => {
+		const oldUser = await db.collection('users').findOne({ _id: ObjectId(user.id) });
+		user.role     = oldUser.role;
+
+		if (oldUser) {
+			return await db.collection('users').replaceOne(
+				 {
+					 _id: ObjectId(user.id)
+				 },
+				 {
+					 name: user.name,
+					 lastname: user.lastname,
+					 role: user.role,
+					 email: user.email,
+					 password: user.password,
+				 }
+			);
+		}
+
+		throw ({ msg: 'El post no fue encontrado' });
+	});
+}
+
+export async function getById(id) {
+	return DBConnection(async db => {
+		return await db.collection('users').findOne({ _id: ObjectId(id) });
 	});
 }

@@ -33,8 +33,8 @@ export function getAll(req, res) {
 export function getById(req, res) {
    const id = req.params.id;
    
-   post.getById(id).then(resp => {
-      res.json(resp);
+   post.getById(id).then(r => {
+      res.json(r);
    }).catch(() => {
       res.status(400).json({ msg: 'Error al traer el post' });
    });

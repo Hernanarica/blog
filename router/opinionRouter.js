@@ -14,6 +14,8 @@ opinionRouter.route('/api-opinion')
 
 opinionRouter.route('/api-opinion/:id')
 	 .delete(opinionsController.remove)
-	 .patch(opinionsController.published);
+	 .patch(opinionsController.published)
+	 .get(opinionsController.getById)
+	 .put(opinionsController.edit);
 
 export default opinionRouter;

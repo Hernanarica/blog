@@ -3,10 +3,15 @@ import * as userController from '../controller/userController.js';
 
 const userRouter = express.Router();
 
-userRouter.route('/api-userCreate')
+userRouter.route('/api-user')
 	 .post(userController.create);
-userRouter.route('/api-usersGetAll')
+
+userRouter.route('/api-users')
 	 .get(userController.getAll);
 
+userRouter.route('/api-user/:id')
+	 .delete(userController.remove)
+	 .patch(userController.edit)
+	 .get(userController.getById);
 
 export default userRouter;
