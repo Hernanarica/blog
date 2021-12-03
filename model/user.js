@@ -62,3 +62,9 @@ export async function edit(userData) {
 		throw ({ msg: 'El post no fue encontrado' });
 	});
 }
+
+export async function getById(id) {
+	return DBConnection(async db => {
+		return await db.collection('users').findOne({ _id: ObjectId(id) });
+	});
+}

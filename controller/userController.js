@@ -55,3 +55,13 @@ export function edit(req, res) {
 		res.status(400).json({ msg: err.msg, err: err.errors });
 	});
 }
+
+export function getById(req, res) {
+	const id = req.params.id;
+
+	user.getById(id).then(r => {
+		res.json(r);
+	}).catch(() => {
+		res.status(400).json({ msg: 'Error al traer el usuario' });
+	});
+}

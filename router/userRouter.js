@@ -11,6 +11,7 @@ userRouter.route('/api-users')
 
 userRouter.route('/api-user/:id')
 	 .delete(userController.remove)
-	 .patch(userController.edit);
+	 .patch(userController.edit)
+	 .get(userController.getById);
 
 export default userRouter;
