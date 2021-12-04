@@ -21,3 +21,5 @@ postRouter.route('/api-post/:id')
 	 .put(postController.edit);
 
 export default postRouter;
+
+//los post tendrian que ser de cada usuario api/user/post

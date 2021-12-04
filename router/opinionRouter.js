@@ -3,6 +3,7 @@ import * as opinionsController from '../controller/opinionsController.js';
 
 const opinionRouter = express.Router();
 
+//api tendria que ser independiente de todo "api/lo que sea"
 opinionRouter.route('/api-opinions')
 	 .get(opinionsController.getAll);
 
@@ -19,3 +20,5 @@ opinionRouter.route('/api-opinion/:id')
 	 .put(opinionsController.edit);
 
 export default opinionRouter;
+
+//los post tendrian que ser de cada usuario api/user/post

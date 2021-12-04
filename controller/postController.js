@@ -59,7 +59,7 @@ export function remove(req, res) {
 }
 
 export function published(req, res) {
-   post.published(req.params.id).then(r => {
+   post.published(req.params.id).then(res => {
       res.json({ msg: 'Post publicado con éxito' });
    }).catch(err => {
       res.status(400).json({ msg: 'Error al hacer publico el post' });

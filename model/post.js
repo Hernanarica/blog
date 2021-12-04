@@ -1,5 +1,3 @@
-export default Panel;
-
 import DBConnection from "./database.js";
 import { ObjectId } from "mongodb";
 
@@ -26,6 +24,7 @@ export async function getById(id) {
 export async function getAllPublished() {
    return DBConnection(async db => {
       const posts = await db.collection('posts').find().toArray();
+      //el filter tiene que venir de la base de datos ya filtrados
       return posts.filter(post => post.public === true);
    });
 }
