@@ -9,13 +9,13 @@ let loginScheme = yup.object({
 
 export function login(req, res) {
 	loginScheme.validate(req.body)
-		 .then(loginValid => {
-			 return auth.login(loginValid.email, loginValid.password);
-		 })
-		 .then(r => {
-			 const token = createToken(r);
-			 res.json({ r, token });
-		 }).catch(err => {
+		.then(loginValid => {
+			return auth.login(loginValid.email, loginValid.password);
+		})
+		.then(r => {
+			const token = createToken(r);
+			res.json({ user: r, token });
+		}).catch(err => {
 		res.status(400).json({ msg: err, err: err.errors });
 	});
 }

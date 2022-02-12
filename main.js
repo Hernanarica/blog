@@ -12,10 +12,10 @@ dotenv.config();
 
 APP.use(express.json());
 APP.use(cors());
-APP.use('/user', userRouter);
-APP.use('/user', authRouter);
-APP.use('/user', postRouter);
-APP.use('/user', opinionRouter);
+APP.use('/api', userRouter);
+APP.use('/api', authRouter);
+APP.use('/api', postRouter);
+APP.use('/api', opinionRouter);
 
 APP.listen(9001, () => {
 	console.log('SERVER ON :)');

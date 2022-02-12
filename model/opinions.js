@@ -22,22 +22,21 @@ export async function remove(id) {
 export async function published(id) {
 	return DBConnection(async db => {
 		return await db.collection('opinions').updateOne(
-			 {
-				 _id: ObjectId(id)
-			 },
-			 {
-				 $set: {
-					 public: true
-				 }
-			 }
+			{
+				_id: ObjectId(id)
+			},
+			{
+				$set: {
+					public: true
+				}
+			}
 		);
 	});
 }
 
 export async function getAllPublished() {
 	return DBConnection(async db => {
-		const opinions = await db.collection('opinions').find().toArray();
-		return opinions.filter(opinion => opinion.public === true);
+		return await db.collection('opinions').find({ public: true }).toArray();
 	});
 }
 
@@ -49,27 +48,27 @@ export async function getById(id) {
 
 export async function edit(opinionData) {
 	const opinion = { ...opinionData };
-
+	
 	return DBConnection(async db => {
 		const oldOpinion = await db.collection('opinions').findOne({ _id: ObjectId(opinion.id) });
 		opinion.public   = oldOpinion.public;
 		opinion.created  = oldOpinion.created;
-
+		
 		if (oldOpinion) {
 			return await db.collection('opinions').replaceOne(
-				 {
-					 _id: ObjectId(opinion.id)
-				 },
-				 {
-					 name: opinion.name,
-					 lastname: opinion.lastname,
-					 text: opinion.text,
-					 created: opinion.created,
-					 public: opinion.public
-				 }
+				{
+					_id: ObjectId(opinion.id)
+				},
+				{
+					name: opinion.name,
+					lastname: opinion.lastname,
+					text: opinion.text,
+					created: opinion.created,
+					public: opinion.public
+				}
 			);
 		}
-
+		
 		throw ({ msg: 'La opinión no fue encontrada' });
 	});
 }
