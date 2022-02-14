@@ -23,7 +23,7 @@ export async function getById(id) {
 
 export async function getAllPublished() {
 	return DBConnection(async db => {
-		return await db.collection('posts').find({ public: true }).toArray();
+		return await db.collection('posts').find({ isPublic: true }).toArray();
 	});
 }
 
@@ -41,7 +41,7 @@ export async function published(id) {
 			},
 			{
 				$set: {
-					public: true
+					isPublic: true
 				}
 			}
 		);
@@ -53,7 +53,7 @@ export async function edit(postData) {
 	
 	return DBConnection(async db => {
 		const oldPost = await db.collection('posts').findOne({ _id: ObjectId(post.id) });
-		post.public   = oldPost.public;
+		post.isPublic   = oldPost.isPublic;
 		post.created  = oldPost.created;
 		
 		if (oldPost) {
@@ -65,7 +65,7 @@ export async function edit(postData) {
 					title: post.title,
 					text: post.text,
 					created: post.created,
-					public: post.public
+					isPublic: post.isPublic
 				}
 			);
 		}

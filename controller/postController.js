@@ -12,7 +12,7 @@ export function create(req, res) {
 			return post.create({
 				...postValid,
 				created: new Date().toDateString(),
-				public: false
+				isPublic: false
 			});
 		})
 		.then(() => {
