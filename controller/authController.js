@@ -14,7 +14,7 @@ export function login(req, res) {
 		})
 		.then(r => {
 			const token = createToken(r);
-			res.json({ user: r, token });
+			res.json({ user: r, token, status: 'success' });
 		}).catch(err => {
 		res.status(400).json({ msg: err, err: err.errors });
 	});
