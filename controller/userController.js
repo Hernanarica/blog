@@ -13,7 +13,7 @@ export function create(req, res) {
 		 .then(userValid => {
 			 return user.create({
 				 ...userValid,
-				 role: req.body.role
+				 role: req.body.role ?? 'user'
 			 });
 		 })
 		 .then(r => {
