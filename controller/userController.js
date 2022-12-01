@@ -19,7 +19,7 @@ export function create(req, res) {
 		 .then(r => {
 			 res.json({ msg: r });
 		 }).catch(err => {
-		res.status(400).json({ msg: err.msg, err: err.errors });
+		res.status(400).json({ msg: err.msg, err: err.errors, status: 'error' });
 	});
 }
 
