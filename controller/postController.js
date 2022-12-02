@@ -1,5 +1,8 @@
 import * as post from "../model/post.js";
 import * as yup from "yup";
+import moment from 'moment';
+
+moment.locale('es-mx');
 
 let postSchema = yup.object({
 	title: yup.string().required("El título es requerido"),
@@ -11,7 +14,7 @@ export function create(req, res) {
 		.then(postValid => {
 			return post.create({
 				...postValid,
-				created: new Date().toDateString(),
+				created: moment().format('LL'),
 				isPublic: false
 			});
 		})
