@@ -1,12 +1,21 @@
 import express from "express";
 import * as commentController from '../controller/commentController.js'
-import postRouter from "./postRouter.js";
 
 const commentRouter = express.Router();
 
-postRouter.route('/post/:id')
-    .post(commentController.createComment)
+commentRouter.route('/comment/getAll/:fk_post')
     .get(commentController.getAllComment);
 
-export default postRouter;
+commentRouter.route('/comment/create-comment/')
+    .post(commentController.createComment)
+
+//editar el comentario del usuario
+commentRouter.route('/comment/edit-comment/:id')
+      .put(commentController.editComment)
+
+//eliminar el comentario del usuario
+commentRouter.route('/comment/delete-comment/:id')
+      .delete(commentController.deleteComment)
+
+export default commentRouter;
 

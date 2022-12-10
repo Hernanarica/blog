@@ -3,8 +3,9 @@ import userRouter from "./router/userRouter.js";
 import authRouter from "./router/authRouter.js";
 import postRouter from "./router/postRouter.js";
 import opinionRouter from "./router/opinionRouter.js";
-import dotenv from 'dotenv';
+import commentRouter from "./router/commentRouter.js";
 
+import dotenv from 'dotenv';
 import cors from 'cors';
 
 const APP = express();
@@ -15,6 +16,7 @@ APP.use(cors());
 APP.use('/api', userRouter);
 APP.use('/api', authRouter);
 APP.use('/api', postRouter);
+APP.use('/api', commentRouter);
 APP.use('/api', opinionRouter);
 
 APP.listen(9001, () => {
