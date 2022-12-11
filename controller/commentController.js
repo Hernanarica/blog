@@ -11,6 +11,10 @@ let commentSchema = yup.object({
    fk_user: yup.string().required("El id del usuario es requerido")
 }).noUnknown();
 
+let commentSchemaEdit = yup.object({
+   text: yup.string().required("El texto es requerido"),
+}).noUnknown();
+
 export function createComment(req, res) {
    commentSchema.validate(req.body)
        .then(commentValid => {
@@ -44,9 +48,9 @@ export function getAllComment(req, res) {
 
 //editar el comentario del usuario
 export function editComment(req, res) {
-   commentSchema.validate(req.body)
-       .then(commentValid => {
-           return comment.edit(req.params.id, commentValid);
+   commentSchemaEdit.validate(req.body)
+       .then(commentSchemaEdit => {
+           return comment.edit(req.params.id, commentSchemaEdit);
        })
          .then(() => {
            res.json({ msg: 'El comentario fue editado con éxito' });
