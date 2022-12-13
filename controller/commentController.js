@@ -32,8 +32,7 @@ export function createComment(req, res) {
 
 //metodo para traer todos los comentarios por medio el fk_post
 export function getAllComment(req, res) {
-   console.log(req.params.fk_post);
-   const fk_post = req.params.fk_post;
+   const fk_post = req.query.fk_post;
    comment.getAll(fk_post)
        .then(comments => {
            res.json(comments);
@@ -41,10 +40,14 @@ export function getAllComment(req, res) {
        res.status(400).json({ msg: 'Error al obtener los comentarios', err: err.errors });
        console.log(err);
    });
-   if (!req.params.fk_post) {
+   if (!req.query.fk_post) {
          res.status(400).json({ msg: 'Error al obtener los comentarios' });
    }
 }
+
+
+//metodo para traer todos los comentarios, mandando el fk_post por parametro
+
 
 //editar el comentario del usuario
 export function editComment(req, res) {
