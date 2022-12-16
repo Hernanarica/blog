@@ -35,7 +35,7 @@ export function getAll(req, res) {
 
 export function getById(req, res) {
 	const id = req.params.id;
-	
+
 	post.getById(id).then(r => {
 		res.json(r);
 	}).catch(() => {

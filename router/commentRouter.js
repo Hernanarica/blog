@@ -3,7 +3,7 @@ import * as commentController from '../controller/commentController.js'
 
 const commentRouter = express.Router();
 
-commentRouter.route('/comment/get-all/')
+commentRouter.route('/comments/:id_post')
     .get(commentController.getAllComment);
 
 commentRouter.route('/comment/create-comment/')

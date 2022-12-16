@@ -16,6 +16,7 @@ let commentSchemaEdit = yup.object({
 }).noUnknown();
 
 export function createComment(req, res) {
+  console.log(req.body);
    commentSchema.validate(req.body)
        .then(commentValid => {
            return comment.create({
@@ -32,17 +33,17 @@ export function createComment(req, res) {
 
 //metodo para traer todos los comentarios por medio el fk_post
 export function getAllComment(req, res) {
-   const fk_post = req.query.fk_post;
+   const fk_post = req.params.id_post;
+
    comment.getAll(fk_post)
-       .then(comments => {
-           res.json(comments);
-       }).catch(err => {
-       res.status(400).json({ msg: 'Error al obtener los comentarios', err: err.errors });
-       console.log(err);
-   });
-   if (!req.query.fk_post) {
-         res.status(400).json({ msg: 'Error al obtener los comentarios' });
-   }
+    .then(comments => {
+        res.json(comments);
+    }).catch(err => {
+        res.status(400).json({ msg: 'Error al obtener los comentarios', err: err.errors });
+    });
+  //  if (!req.params._post) {
+  //        res.status(400).json({ msg: 'Error al obtener los comentarios' });
+  //  }
 }
 
 
