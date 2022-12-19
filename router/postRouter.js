@@ -1,5 +1,6 @@
 import express from "express";
 import * as postController from '../controller/postController.js';
+import {authToken} from "../middleware/auth.js";
 
 const postRouter = express.Router();
 
@@ -14,8 +15,8 @@ postRouter.route('/post/create')
 
 postRouter.route('/post/:id')
 	.get(postController.getById)
-	.delete(postController.remove)
+	.delete(authToken, postController.remove)
 	.patch(postController.published)
-	.put(postController.edit);
+	.put(authToken, postController.edit);
 
 export default postRouter;
