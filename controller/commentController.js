@@ -43,19 +43,6 @@ export function getAllComment(req, res) {
     });
 }
 
-//editar el comentario del usuario
-export function editComment(req, res) {
-   commentSchemaEdit.validate(req.body)
-       .then(commentSchemaEdit => {
-           return comment.edit(req.params.id, commentSchemaEdit);
-       })
-         .then(() => {
-           res.json({ msg: 'El comentario fue editado con éxito' });
-         }).catch(err => {
-         res.status(400).json({ msg: 'Error al editar el comentario', err: err.errors });
-       });
-}
-
 //eliminar el comentario del usuario
 export function deleteComment(req, res) {
    comment.borrar(req.params.id)

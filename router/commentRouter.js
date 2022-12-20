@@ -10,10 +10,6 @@ commentRouter.route('/comments/:id_post')
 commentRouter.route('/comment/create-comment/')
     .post(authToken, commentController.createComment)
 
-//editar el comentario del usuario
-commentRouter.route('/comment/edit-comment/:id')
-      .put(commentController.editComment)
-
 //eliminar el comentario del usuario
 commentRouter.route('/comment/delete-comment/:id')
       .delete(authToken, commentController.deleteComment)
