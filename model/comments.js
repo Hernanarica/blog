@@ -22,13 +22,6 @@ export async function create(commentData) {
    });
 }
 
-export async function edit(id, commentData) {
-   return DBConnection(async db => {
-      const newComment = {...commentData};
-      return await db.collection('comments').updateOne({_id: ObjectId(id)}, {$set: newComment});
-   });
-}
-
 //eliminar el comentario del usuario
 export async function borrar(id) {
    return DBConnection(async db => {

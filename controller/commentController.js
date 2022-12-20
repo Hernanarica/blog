@@ -11,10 +11,6 @@ let commentSchema = yup.object({
    fk_user: yup.string().required("El id del usuario es requerido")
 }).noUnknown();
 
-let commentSchemaEdit = yup.object({
-   text: yup.string().required("El texto es requerido"),
-}).noUnknown();
-
 export function createComment(req, res) {
   console.log(req.body);
    commentSchema.validate(req.body)
@@ -31,7 +27,7 @@ export function createComment(req, res) {
        });
 }
 
-//metodo para traer todos los comentarios por medio el fk_post
+//método para traer todos los comentarios por medio el fk_post
 export function getAllComment(req, res) {
    const fk_post = req.params.id_post;
 
@@ -41,26 +37,6 @@ export function getAllComment(req, res) {
     }).catch(err => {
         res.status(400).json({ msg: 'Error al obtener los comentarios', err: err.errors });
     });
-  //  if (!req.params._post) {
-  //        res.status(400).json({ msg: 'Error al obtener los comentarios' });
-  //  }
-}
-
-
-//metodo para traer todos los comentarios, mandando el fk_post por parametro
-
-
-//editar el comentario del usuario
-export function editComment(req, res) {
-   commentSchemaEdit.validate(req.body)
-       .then(commentSchemaEdit => {
-           return comment.edit(req.params.id, commentSchemaEdit);
-       })
-         .then(() => {
-           res.json({ msg: 'El comentario fue editado con éxito' });
-         }).catch(err => {
-         res.status(400).json({ msg: 'Error al editar el comentario', err: err.errors });
-       });
 }
 
 //eliminar el comentario del usuario
