@@ -21,30 +21,9 @@ export async function getById(id) {
 	});
 }
 
-export async function getAllPublished() {
-	return DBConnection(async db => {
-		return await db.collection('posts').find({ isPublic: true }).toArray();
-	});
-}
-
 export async function remove(id) {
 	return DBConnection(async db => {
 		return await db.collection('posts').deleteOne({ _id: ObjectId(id) });
-	});
-}
-
-export async function published(id) {
-	return DBConnection(async db => {
-		return await db.collection('posts').updateOne(
-			{
-				_id: ObjectId(id)
-			},
-			{
-				$set: {
-					isPublic: true
-				}
-			}
-		);
 	});
 }
 

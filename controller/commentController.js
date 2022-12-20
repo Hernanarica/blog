@@ -41,14 +41,7 @@ export function getAllComment(req, res) {
     }).catch(err => {
         res.status(400).json({ msg: 'Error al obtener los comentarios', err: err.errors });
     });
-  //  if (!req.params._post) {
-  //        res.status(400).json({ msg: 'Error al obtener los comentarios' });
-  //  }
 }
-
-
-//metodo para traer todos los comentarios, mandando el fk_post por parametro
-
 
 //editar el comentario del usuario
 export function editComment(req, res) {
