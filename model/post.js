@@ -11,7 +11,7 @@ export async function create(postData) {
 
 export async function getAll() {
 	return DBConnection(async db => {
-      return await db.collection('posts').find().sort({created: -1}).toArray();
+      return await db.collection('posts').find().sort({ _id: -1 }).toArray();
 	});
 }
 

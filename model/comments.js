@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 //traer todos los comentarios de un post traido por el fk_post, enviados como parametros
 export function getAll(fk_post) {
    return DBConnection( async db => {
-      return await db.collection('comments').find({fk_post: fk_post}).toArray();
+      return await db.collection('comments').find({fk_post: fk_post}).sort({ _id: -1 }).toArray();
    });
 }
 
