@@ -12,12 +12,12 @@ let commentSchema = yup.object({
 }).noUnknown();
 
 export function createComment(req, res) {
-  console.log(req.body);
+  console.log('fecha: ', moment().format('LLL'),);
    commentSchema.validate(req.body)
        .then(commentValid => {
            return comment.create({
               ...commentValid,
-              date: moment().format('LLL'),
+              date: moment().format('LL'),
            });
        })
          .then(() => {
