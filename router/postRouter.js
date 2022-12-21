@@ -15,6 +15,6 @@ postRouter.route('/post/create')
 postRouter.route('/post/:id')
 	.get(postController.getById)
 	.delete(authToken, postController.remove)
-	.put(authToken, postController.edit);
+	.patch(authToken, postController.edit);
 
 export default postRouter;
